@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e91c503dfc3844ce8979f636b44b841a" Name="Diagram1">
+        <EntityTypeShape EntityType="amislModel.ctacontable" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.estadistica" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.etiqueta" Width="1.5" PointX="8" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.gasto" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.gasto_rep" Width="1.5" PointX="5.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.idioma" Width="1.5" PointX="5.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.ingreso" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.ingreso_rep" Width="1.5" PointX="7.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.nivel" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.nivel_usuario" Width="1.5" PointX="8" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.rep_estadistica" Width="1.5" PointX="9.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.rep_financiero" Width="1.5" PointX="10.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.tipo" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="amislModel.usuario" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <AssociationConnector Association="amislModel.fk_Gasto_CtaContable1" ManuallyRouted="false" />
+        <AssociationConnector Association="amislModel.fk_Ingreso_CtaContable1" ManuallyRouted="false" />
+        <AssociationConnector Association="amislModel.fk_estadistica_TIPO1" ManuallyRouted="false" />
+        <AssociationConnector Association="amislModel.fk_ETIQUETA_IDIOMA1" ManuallyRouted="false" />
+        <AssociationConnector Association="amislModel.fk_Gasto_TIPO1" ManuallyRouted="false" />
+        <AssociationConnector Association="amislModel.fk_Ingreso_TIPO1" ManuallyRouted="false" />
+        <AssociationConnector Association="amislModel.fk_NIVEL_USUARIO_Nivel1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

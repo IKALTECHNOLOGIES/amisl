@@ -1,0 +1,793 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="amislModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ctacontable">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="CODIGO" Type="varchar" MaxLength="250" />
+          <Property Name="IDENTIFICADOR" Type="varchar" MaxLength="250" />
+          <Property Name="TIPO" Type="varchar" MaxLength="1" />
+          <Property Name="NIVEL" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="estadistica">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_TIPO" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="UUID_TIPO" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="etiqueta">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="VALOR" Type="varchar" MaxLength="250" />
+          <Property Name="UUID_IDIOMA" Type="varchar" MaxLength="32" />
+          <Property Name="UUID_REGISTRO" Type="varchar" MaxLength="32" />
+          <Property Name="IDENTIFICADOR" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="gasto">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_CTACONTABLE" />
+            <PropertyRef Name="UUID_TIPO" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="varchar" MaxLength="250" />
+          <Property Name="UUID_CTACONTABLE" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UUID_TIPO" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="NIVEL" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="gasto_rep">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_GASTO" />
+            <PropertyRef Name="UUID_REP_FINANCIERO" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="MONTO" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="UUID_GASTO" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UUID_REP_FINANCIERO" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="idioma">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="150" />
+          <Property Name="ABREVIATURA" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ingreso">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_CTACONTABLE" />
+            <PropertyRef Name="UUID_TIPO" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="varchar" MaxLength="250" />
+          <Property Name="UUID_CTACONTABLE" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UUID_TIPO" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="NIVEL" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ingreso_rep">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_INGRESO" />
+            <PropertyRef Name="UUID_REP_FINANCIERO" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="MONTO" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="UUID_INGRESO" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UUID_REP_FINANCIERO" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nivel">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="NIVEL" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="varchar" MaxLength="250" />
+          <Property Name="SUPERIOR" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="nivel_usuario">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UUID_NIVEL" Type="varchar" MaxLength="32" />
+          <Property Name="UUID_USUARIO" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="rep_estadistica">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_REP_FINANCIERO" />
+            <PropertyRef Name="UUID_ESTADISTICA" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="VALOR" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="UUID_REP_FINANCIERO" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UUID_ESTADISTICA" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rep_financiero">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="NIVEL" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="MES" Type="int" />
+          <Property Name="ANIO" Type="int" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="SALDOANTERIOR" Type="decimal" Precision="14" Scale="4" />
+          <Property Name="TASACAMBIO" Type="decimal" Precision="14" Scale="4" />
+          <Property Name="NIVEL" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="varchar" MaxLength="250" />
+          <Property Name="TIPO" Type="int" />
+          <Property Name="NIVEL" Type="varchar" MaxLength="250" />
+          <Property Name="ING_EGR_EST" Type="int" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="NIVEL" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="250" />
+          <Property Name="APELLIDOS" Type="varchar" MaxLength="250" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="150" />
+          <Property Name="TEL1" Type="varchar" MaxLength="45" />
+          <Property Name="TEL2" Type="varchar" MaxLength="45" />
+          <Property Name="TEL3" Type="varchar" MaxLength="45" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="45" />
+          <Property Name="DIR1" Type="varchar" MaxLength="500" />
+          <Property Name="DIR2" Type="varchar" MaxLength="500" />
+          <Property Name="DIR3" Type="varchar" MaxLength="500" />
+          <Property Name="NIVEL" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CLAVE" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="fk_estadistica_TIPO1">
+          <End Role="tipo" Type="Self.tipo" Multiplicity="1" />
+          <End Role="estadistica" Type="Self.estadistica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="estadistica">
+              <PropertyRef Name="UUID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ETIQUETA_IDIOMA1">
+          <End Role="idioma" Type="Self.idioma" Multiplicity="0..1" />
+          <End Role="etiqueta" Type="Self.etiqueta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="idioma">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="etiqueta">
+              <PropertyRef Name="UUID_IDIOMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Gasto_CtaContable1">
+          <End Role="ctacontable" Type="Self.ctacontable" Multiplicity="1" />
+          <End Role="gasto" Type="Self.gasto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ctacontable">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="gasto">
+              <PropertyRef Name="UUID_CTACONTABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'fk_GASTO_REP_Gasto1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="fk_GASTO_REP_Gasto1" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'fk_GASTO_REP_REP_FINANCIERO1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="fk_GASTO_REP_REP_FINANCIERO1" />-->
+        <Association Name="fk_Gasto_TIPO1">
+          <End Role="tipo" Type="Self.tipo" Multiplicity="1" />
+          <End Role="gasto" Type="Self.gasto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="gasto">
+              <PropertyRef Name="UUID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Ingreso_CtaContable1">
+          <End Role="ctacontable" Type="Self.ctacontable" Multiplicity="1" />
+          <End Role="ingreso" Type="Self.ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ctacontable">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="ingreso">
+              <PropertyRef Name="UUID_CTACONTABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'fk_INGRESO_REP_Ingreso1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="fk_INGRESO_REP_Ingreso1" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'fk_INGRESO_REP_REP_FINANCIERO1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="fk_INGRESO_REP_REP_FINANCIERO1" />-->
+        <Association Name="fk_Ingreso_TIPO1">
+          <End Role="tipo" Type="Self.tipo" Multiplicity="1" />
+          <End Role="ingreso" Type="Self.ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="ingreso">
+              <PropertyRef Name="UUID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_NIVEL_USUARIO_Nivel1">
+          <End Role="nivel" Type="Self.nivel" Multiplicity="0..1" />
+          <End Role="nivel_usuario" Type="Self.nivel_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nivel">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="nivel_usuario">
+              <PropertyRef Name="UUID_NIVEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'fk_NIVEL_USUARIO_Usuario1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="fk_NIVEL_USUARIO_Usuario1" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'fk_RepLS_estadistica_estadistica1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="fk_RepLS_estadistica_estadistica1" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'fk_RepLS_estadistica_REP_FINANCIERO1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="fk_RepLS_estadistica_REP_FINANCIERO1" />-->
+        <EntityContainer Name="amislModelStoreContainer">
+          <EntitySet Name="ctacontable" EntityType="Self.ctacontable" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="estadistica" EntityType="Self.estadistica" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="etiqueta" EntityType="Self.etiqueta" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="gasto" EntityType="Self.gasto" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="gasto_rep" EntityType="Self.gasto_rep" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="idioma" EntityType="Self.idioma" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="ingreso" EntityType="Self.ingreso" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="ingreso_rep" EntityType="Self.ingreso_rep" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="nivel" EntityType="Self.nivel" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="nivel_usuario" EntityType="Self.nivel_usuario" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="rep_estadistica" EntityType="Self.rep_estadistica" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="rep_financiero" EntityType="Self.rep_financiero" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="tipo" EntityType="Self.tipo" Schema="amisl" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="amisl" store:Type="Tables" />
+          <AssociationSet Name="fk_estadistica_TIPO1" Association="Self.fk_estadistica_TIPO1">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="estadistica" EntitySet="estadistica" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ETIQUETA_IDIOMA1" Association="Self.fk_ETIQUETA_IDIOMA1">
+            <End Role="idioma" EntitySet="idioma" />
+            <End Role="etiqueta" EntitySet="etiqueta" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Gasto_CtaContable1" Association="Self.fk_Gasto_CtaContable1">
+            <End Role="ctacontable" EntitySet="ctacontable" />
+            <End Role="gasto" EntitySet="gasto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Gasto_TIPO1" Association="Self.fk_Gasto_TIPO1">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="gasto" EntitySet="gasto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Ingreso_CtaContable1" Association="Self.fk_Ingreso_CtaContable1">
+            <End Role="ctacontable" EntitySet="ctacontable" />
+            <End Role="ingreso" EntitySet="ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Ingreso_TIPO1" Association="Self.fk_Ingreso_TIPO1">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="ingreso" EntitySet="ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_NIVEL_USUARIO_Nivel1" Association="Self.fk_NIVEL_USUARIO_Nivel1">
+            <End Role="nivel" EntitySet="nivel" />
+            <End Role="nivel_usuario" EntitySet="nivel_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="amislModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ctacontable">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CODIGO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IDENTIFICADOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="NIVEL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="gasto" Relationship="Self.fk_Gasto_CtaContable1" FromRole="ctacontable" ToRole="gasto" />
+          <NavigationProperty Name="ingreso" Relationship="Self.fk_Ingreso_CtaContable1" FromRole="ctacontable" ToRole="ingreso" />
+        </EntityType>
+        <EntityType Name="estadistica">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_TIPO" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UUID_TIPO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tipo" Relationship="Self.fk_estadistica_TIPO1" FromRole="estadistica" ToRole="tipo" />
+        </EntityType>
+        <EntityType Name="etiqueta">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UUID_IDIOMA" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="UUID_REGISTRO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IDENTIFICADOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="idioma" Relationship="Self.fk_ETIQUETA_IDIOMA1" FromRole="etiqueta" ToRole="idioma" />
+        </EntityType>
+        <EntityType Name="gasto">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_CTACONTABLE" />
+            <PropertyRef Name="UUID_TIPO" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UUID_CTACONTABLE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UUID_TIPO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NIVEL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ctacontable" Relationship="Self.fk_Gasto_CtaContable1" FromRole="gasto" ToRole="ctacontable" />
+          <NavigationProperty Name="tipo" Relationship="Self.fk_Gasto_TIPO1" FromRole="gasto" ToRole="tipo" />
+        </EntityType>
+        <EntityType Name="gasto_rep">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_GASTO" />
+            <PropertyRef Name="UUID_REP_FINANCIERO" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MONTO" Type="Decimal" Nullable="false" />
+          <Property Name="UUID_GASTO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UUID_REP_FINANCIERO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="idioma">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ABREVIATURA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="etiqueta" Relationship="Self.fk_ETIQUETA_IDIOMA1" FromRole="idioma" ToRole="etiqueta" />
+        </EntityType>
+        <EntityType Name="ingreso">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_CTACONTABLE" />
+            <PropertyRef Name="UUID_TIPO" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UUID_CTACONTABLE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UUID_TIPO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NIVEL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ctacontable" Relationship="Self.fk_Ingreso_CtaContable1" FromRole="ingreso" ToRole="ctacontable" />
+          <NavigationProperty Name="tipo" Relationship="Self.fk_Ingreso_TIPO1" FromRole="ingreso" ToRole="tipo" />
+        </EntityType>
+        <EntityType Name="ingreso_rep">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_INGRESO" />
+            <PropertyRef Name="UUID_REP_FINANCIERO" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MONTO" Type="Decimal" Nullable="false" />
+          <Property Name="UUID_INGRESO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UUID_REP_FINANCIERO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nivel">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NIVEL1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SUPERIOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="nivel_usuario" Relationship="Self.fk_NIVEL_USUARIO_Nivel1" FromRole="nivel" ToRole="nivel_usuario" />
+        </EntityType>
+        <EntityType Name="nivel_usuario">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UUID_NIVEL" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="UUID_USUARIO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="nivel" Relationship="Self.fk_NIVEL_USUARIO_Nivel1" FromRole="nivel_usuario" ToRole="nivel" />
+        </EntityType>
+        <EntityType Name="rep_estadistica">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="UUID_REP_FINANCIERO" />
+            <PropertyRef Name="UUID_ESTADISTICA" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALOR" Type="Decimal" Nullable="false" />
+          <Property Name="UUID_REP_FINANCIERO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UUID_ESTADISTICA" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rep_financiero">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="NIVEL" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MES" Type="Int32" />
+          <Property Name="ANIO" Type="Int32" />
+          <Property Name="FECHA" Type="DateTime" />
+          <Property Name="SALDOANTERIOR" Type="Decimal" />
+          <Property Name="TASACAMBIO" Type="Decimal" />
+          <Property Name="NIVEL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDENTIFICADOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO1" Type="Int32" />
+          <Property Name="NIVEL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ING_EGR_EST" Type="Int32" />
+          <NavigationProperty Name="estadistica" Relationship="Self.fk_estadistica_TIPO1" FromRole="tipo" ToRole="estadistica" />
+          <NavigationProperty Name="gasto" Relationship="Self.fk_Gasto_TIPO1" FromRole="tipo" ToRole="gasto" />
+          <NavigationProperty Name="ingreso" Relationship="Self.fk_Ingreso_TIPO1" FromRole="tipo" ToRole="ingreso" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="UUID" />
+            <PropertyRef Name="NIVEL" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TEL1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TEL2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TEL3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="DIR1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DIR2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DIR3" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NIVEL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLAVE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_Gasto_CtaContable1">
+          <End Role="ctacontable" Type="Self.ctacontable" Multiplicity="1" />
+          <End Role="gasto" Type="Self.gasto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ctacontable">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="gasto">
+              <PropertyRef Name="UUID_CTACONTABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Ingreso_CtaContable1">
+          <End Role="ctacontable" Type="Self.ctacontable" Multiplicity="1" />
+          <End Role="ingreso" Type="Self.ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ctacontable">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="ingreso">
+              <PropertyRef Name="UUID_CTACONTABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_estadistica_TIPO1">
+          <End Role="tipo" Type="Self.tipo" Multiplicity="1" />
+          <End Role="estadistica" Type="Self.estadistica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="estadistica">
+              <PropertyRef Name="UUID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ETIQUETA_IDIOMA1">
+          <End Role="idioma" Type="Self.idioma" Multiplicity="0..1" />
+          <End Role="etiqueta" Type="Self.etiqueta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="idioma">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="etiqueta">
+              <PropertyRef Name="UUID_IDIOMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Gasto_TIPO1">
+          <End Role="tipo" Type="Self.tipo" Multiplicity="1" />
+          <End Role="gasto" Type="Self.gasto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="gasto">
+              <PropertyRef Name="UUID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Ingreso_TIPO1">
+          <End Role="tipo" Type="Self.tipo" Multiplicity="1" />
+          <End Role="ingreso" Type="Self.ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="ingreso">
+              <PropertyRef Name="UUID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_NIVEL_USUARIO_Nivel1">
+          <End Role="nivel" Type="Self.nivel" Multiplicity="0..1" />
+          <End Role="nivel_usuario" Type="Self.nivel_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nivel">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="nivel_usuario">
+              <PropertyRef Name="UUID_NIVEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="amislEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ctacontable" EntityType="Self.ctacontable" />
+          <EntitySet Name="estadistica" EntityType="Self.estadistica" />
+          <EntitySet Name="etiqueta" EntityType="Self.etiqueta" />
+          <EntitySet Name="gasto" EntityType="Self.gasto" />
+          <EntitySet Name="gasto_rep" EntityType="Self.gasto_rep" />
+          <EntitySet Name="idioma" EntityType="Self.idioma" />
+          <EntitySet Name="ingreso" EntityType="Self.ingreso" />
+          <EntitySet Name="ingreso_rep" EntityType="Self.ingreso_rep" />
+          <EntitySet Name="nivel" EntityType="Self.nivel" />
+          <EntitySet Name="nivel_usuario" EntityType="Self.nivel_usuario" />
+          <EntitySet Name="rep_estadistica" EntityType="Self.rep_estadistica" />
+          <EntitySet Name="rep_financiero" EntityType="Self.rep_financiero" />
+          <EntitySet Name="tipo" EntityType="Self.tipo" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="fk_Gasto_CtaContable1" Association="Self.fk_Gasto_CtaContable1">
+            <End Role="ctacontable" EntitySet="ctacontable" />
+            <End Role="gasto" EntitySet="gasto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Ingreso_CtaContable1" Association="Self.fk_Ingreso_CtaContable1">
+            <End Role="ctacontable" EntitySet="ctacontable" />
+            <End Role="ingreso" EntitySet="ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_estadistica_TIPO1" Association="Self.fk_estadistica_TIPO1">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="estadistica" EntitySet="estadistica" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ETIQUETA_IDIOMA1" Association="Self.fk_ETIQUETA_IDIOMA1">
+            <End Role="idioma" EntitySet="idioma" />
+            <End Role="etiqueta" EntitySet="etiqueta" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Gasto_TIPO1" Association="Self.fk_Gasto_TIPO1">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="gasto" EntitySet="gasto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Ingreso_TIPO1" Association="Self.fk_Ingreso_TIPO1">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="ingreso" EntitySet="ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_NIVEL_USUARIO_Nivel1" Association="Self.fk_NIVEL_USUARIO_Nivel1">
+            <End Role="nivel" EntitySet="nivel" />
+            <End Role="nivel_usuario" EntitySet="nivel_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="amislModelStoreContainer" CdmEntityContainer="amislEntities">
+          <EntitySetMapping Name="ctacontable">
+            <EntityTypeMapping TypeName="amislModel.ctacontable">
+              <MappingFragment StoreEntitySet="ctacontable">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="IDENTIFICADOR" ColumnName="IDENTIFICADOR" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estadistica">
+            <EntityTypeMapping TypeName="amislModel.estadistica">
+              <MappingFragment StoreEntitySet="estadistica">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="IDENTIFICADOR" ColumnName="IDENTIFICADOR" />
+                <ScalarProperty Name="UUID_TIPO" ColumnName="UUID_TIPO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="etiqueta">
+            <EntityTypeMapping TypeName="amislModel.etiqueta">
+              <MappingFragment StoreEntitySet="etiqueta">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="UUID_IDIOMA" ColumnName="UUID_IDIOMA" />
+                <ScalarProperty Name="UUID_REGISTRO" ColumnName="UUID_REGISTRO" />
+                <ScalarProperty Name="IDENTIFICADOR" ColumnName="IDENTIFICADOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gasto">
+            <EntityTypeMapping TypeName="amislModel.gasto">
+              <MappingFragment StoreEntitySet="gasto">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="IDENTIFICADOR" ColumnName="IDENTIFICADOR" />
+                <ScalarProperty Name="UUID_CTACONTABLE" ColumnName="UUID_CTACONTABLE" />
+                <ScalarProperty Name="UUID_TIPO" ColumnName="UUID_TIPO" />
+                <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gasto_rep">
+            <EntityTypeMapping TypeName="amislModel.gasto_rep">
+              <MappingFragment StoreEntitySet="gasto_rep">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="UUID_GASTO" ColumnName="UUID_GASTO" />
+                <ScalarProperty Name="UUID_REP_FINANCIERO" ColumnName="UUID_REP_FINANCIERO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="idioma">
+            <EntityTypeMapping TypeName="amislModel.idioma">
+              <MappingFragment StoreEntitySet="idioma">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ABREVIATURA" ColumnName="ABREVIATURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ingreso">
+            <EntityTypeMapping TypeName="amislModel.ingreso">
+              <MappingFragment StoreEntitySet="ingreso">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="IDENTIFICADOR" ColumnName="IDENTIFICADOR" />
+                <ScalarProperty Name="UUID_CTACONTABLE" ColumnName="UUID_CTACONTABLE" />
+                <ScalarProperty Name="UUID_TIPO" ColumnName="UUID_TIPO" />
+                <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ingreso_rep">
+            <EntityTypeMapping TypeName="amislModel.ingreso_rep">
+              <MappingFragment StoreEntitySet="ingreso_rep">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="UUID_INGRESO" ColumnName="UUID_INGRESO" />
+                <ScalarProperty Name="UUID_REP_FINANCIERO" ColumnName="UUID_REP_FINANCIERO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nivel">
+            <EntityTypeMapping TypeName="amislModel.nivel">
+              <MappingFragment StoreEntitySet="nivel">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="NIVEL1" ColumnName="NIVEL" />
+                <ScalarProperty Name="IDENTIFICADOR" ColumnName="IDENTIFICADOR" />
+                <ScalarProperty Name="SUPERIOR" ColumnName="SUPERIOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nivel_usuario">
+            <EntityTypeMapping TypeName="amislModel.nivel_usuario">
+              <MappingFragment StoreEntitySet="nivel_usuario">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="UUID_NIVEL" ColumnName="UUID_NIVEL" />
+                <ScalarProperty Name="UUID_USUARIO" ColumnName="UUID_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rep_estadistica">
+            <EntityTypeMapping TypeName="amislModel.rep_estadistica">
+              <MappingFragment StoreEntitySet="rep_estadistica">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="UUID_REP_FINANCIERO" ColumnName="UUID_REP_FINANCIERO" />
+                <ScalarProperty Name="UUID_ESTADISTICA" ColumnName="UUID_ESTADISTICA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rep_financiero">
+            <EntityTypeMapping TypeName="amislModel.rep_financiero">
+              <MappingFragment StoreEntitySet="rep_financiero">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="ANIO" ColumnName="ANIO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="SALDOANTERIOR" ColumnName="SALDOANTERIOR" />
+                <ScalarProperty Name="TASACAMBIO" ColumnName="TASACAMBIO" />
+                <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo">
+            <EntityTypeMapping TypeName="amislModel.tipo">
+              <MappingFragment StoreEntitySet="tipo">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="IDENTIFICADOR" ColumnName="IDENTIFICADOR" />
+                <ScalarProperty Name="TIPO1" ColumnName="TIPO" />
+                <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+                <ScalarProperty Name="ING_EGR_EST" ColumnName="ING_EGR_EST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="amislModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="USUARIO1" ColumnName="USUARIO" />
+                <ScalarProperty Name="TEL1" ColumnName="TEL1" />
+                <ScalarProperty Name="TEL2" ColumnName="TEL2" />
+                <ScalarProperty Name="TEL3" ColumnName="TEL3" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="DIR1" ColumnName="DIR1" />
+                <ScalarProperty Name="DIR2" ColumnName="DIR2" />
+                <ScalarProperty Name="DIR3" ColumnName="DIR3" />
+                <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+                <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
